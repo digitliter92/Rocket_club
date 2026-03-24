@@ -3,302 +3,146 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rocket Lab | To the Edge of Space</title>
+    <title>ROCKET LAB | MISSION TO THE EDGE</title>
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --primary-blue: #3f41cf;
-            --accent-orange: #d98f53;
-            --bg-white: #ffffff;
-            --bg-light: #f8f9ff;
-            --text-dark: #121212;
-            --text-gray: #666;
-            --line-color: #ddd;
+            --white: #ffffff;
+            --black: #000000;
+            --accent: #3f41cf; /* 포인트 컬러 유지 */
         }
 
-        * { box-sizing: border-box; }
-        body { font-family: 'Pretendard', sans-serif; margin: 0; background: var(--bg-white); color: var(--text-dark); scroll-behavior: smooth; overflow-x: hidden; line-height: 1.6; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Pretendard', sans-serif; background-color: var(--black); color: var(--white); overflow-x: hidden; }
 
-        /* Navigation */
+        /* SpaceX 스타일 네비게이션 */
         header {
-            position: fixed; width: 100%; top: 0; z-index: 1000;
-            background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px);
-            border-bottom: 1px solid #eee; display: flex; justify-content: space-between;
-            padding: 15px 8%; align-items: center;
+            position: fixed; top: 0; width: 100%; padding: 40px 50px;
+            display: flex; align-items: flex-end; z-index: 1000;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.5) 0%, transparent 100%);
         }
-        .logo { font-weight: 900; font-size: 1.5rem; color: var(--primary-blue); cursor: pointer; display: flex; align-items: center; gap: 8px; }
-        .logo i { color: var(--accent-orange); }
-        nav a { text-decoration: none; color: var(--text-dark); margin-left: 25px; font-weight: 600; font-size: 0.85rem; transition: 0.3s; }
-        nav a:hover { color: var(--accent-orange); }
-
-        section { padding: 120px 10%; }
-        .section-title { font-size: 2.8rem; font-weight: 900; text-align: center; margin-bottom: 60px; letter-spacing: -1.5px; }
-
-        /* 1. Hero Section */
-        .hero {
-            height: 100vh; display: flex; flex-direction: column; justify-content: center;
-            align-items: center; text-align: center; background: radial-gradient(circle at center, #f0f3ff 0%, #ffffff 100%);
-            padding-top: 80px;
+        .logo { font-size: 1.8rem; font-weight: 900; letter-spacing: -1px; cursor: pointer; }
+        nav { margin-left: 40px; display: flex; gap: 30px; }
+        nav a { 
+            text-decoration: none; color: var(--white); font-size: 0.85rem; 
+            font-weight: 700; position: relative; padding-bottom: 5px;
         }
-        .hero h1 { font-size: clamp(3rem, 8vw, 5.5rem); font-weight: 900; margin: 0; color: var(--text-dark); line-height: 1.1; }
-        .hero p { font-size: 1.25rem; color: var(--text-gray); margin: 25px 0 45px; max-width: 700px; font-weight: 500; }
-        .hero-btn { 
-            padding: 20px 55px; background: var(--primary-blue); color: white; border: none; 
-            border-radius: 50px; font-weight: 800; cursor: pointer; transition: 0.3s; font-size: 1.1rem;
-            box-shadow: 0 10px 20px rgba(63,65,207,0.15);
+        nav a::after {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px;
+            background: var(--white); transition: 0.3s;
         }
-        .hero-btn:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(63,65,207,0.25); background: #2a2ca8; }
+        nav a:hover::after { width: 100%; }
 
-        /* 2. About Us & Roadmap */
-        .about { background: var(--bg-light); border-radius: 0 0 80px 80px; }
-        .roadmap { display: flex; justify-content: space-between; gap: 25px; margin-top: 50px; flex-wrap: wrap; }
-        .roadmap-item { 
-            flex: 1; background: white; padding: 35px; border-radius: 25px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.04); min-width: 280px;
+        /* Full Height Sections */
+        .section {
+            height: 100vh; width: 100%; position: relative;
+            display: flex; flex-direction: column; justify-content: flex-end;
+            padding: 0 0 100px 50px; background-size: cover; background-position: center;
         }
-        .roadmap-item h4 { color: var(--primary-blue); margin-bottom: 15px; font-size: 1.3rem; font-weight: 800; }
 
-        /* 3. Technology */
-        .tech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .tech-card { padding: 45px 35px; border: 1px solid #eee; border-radius: 35px; background: #fff; transition: 0.3s; }
-        .tech-card:hover { border-color: var(--primary-blue); transform: translateY(-5px); }
-        .tech-card i { font-size: 3rem; color: var(--accent-orange); margin-bottom: 20px; }
-        .tech-card h3 { font-size: 1.6rem; margin-bottom: 15px; font-weight: 800; }
+        /* 배경 이미지 설정 (실제 로켓 이미지로 교체 가능) */
+        .bg-1 { background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1517976487492-5750f3195933?auto=format&fit=crop&q=80&w=2000'); }
+        .bg-2 { background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1541185933-ef5d8ed016c2?auto=format&fit=crop&q=80&w=2000'); }
 
-        /* 4. Organization (New Visual Chart) */
-        .org-container { padding: 120px 5%; background: white; }
-        .org-chart-wrapper { display: flex; flex-direction: column; align-items: center; margin-bottom: 80px; }
+        .mission-info { max-width: 500px; animation: fadeInUp 1s ease-out; }
+        .mission-info h4 { font-size: 1.2rem; font-weight: 400; margin-bottom: 10px; }
+        .mission-info h2 { font-size: 3.5rem; font-weight: 900; line-height: 1.1; margin-bottom: 30px; }
         
-        .org-node { 
-            padding: 15px 30px; border-radius: 12px; font-weight: 800; text-align: center; 
-            min-width: 200px; box-shadow: 0 4px 15px rgba(0,0,0,0.06); position: relative;
+        .btn-outline {
+            display: inline-block; padding: 15px 45px; border: 2px solid var(--white);
+            color: var(--white); text-decoration: none; font-weight: 700;
+            text-transform: uppercase; transition: 0.3s; position: relative; overflow: hidden;
         }
-        .node-top { background: var(--primary-blue); color: white; font-size: 1.2rem; }
-        .node-team { background: #fafafa; border: 2px solid var(--primary-blue); color: var(--primary-blue); margin: 30px 0; }
+        .btn-outline:hover { background: var(--white); color: var(--black); }
+
+        /* 조직도 섹션 (다크 테마 최적화) */
+        .org-section { background: var(--black); padding: 100px 50px; text-align: center; }
+        .org-title { font-size: 2.5rem; font-weight: 900; margin-bottom: 80px; text-transform: uppercase; }
         
-        .vertical-line { width: 2px; height: 30px; background: var(--line-color); }
-        
-        .org-branch-container { 
-            display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; width: 100%; 
-            max-width: 1100px; position: relative; padding-top: 30px;
+        .org-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px; max-width: 1200px; margin: 0 auto;
         }
-        /* 가로 연결선 */
-        .org-branch-container::before {
-            content: ''; position: absolute; top: 0; left: 16.6%; right: 16.6%; height: 2px; background: var(--line-color);
-        }
+        .team-box { border-left: 1px solid rgba(255,255,255,0.3); padding-left: 30px; text-align: left; }
+        .team-box h3 { font-size: 1.5rem; color: var(--accent); margin-bottom: 20px; }
+        .team-box ul { list-style: none; opacity: 0.8; }
+        .team-box li { margin-bottom: 10px; font-size: 1rem; }
 
-        .org-column { display: flex; flex-direction: column; align-items: center; }
-        .sub-node-list { display: flex; flex-direction: column; gap: 10px; width: 90%; }
-        .sub-node { 
-            background: #fff; padding: 12px; border: 1px solid #edf0f5; border-radius: 10px; 
-            font-size: 0.95rem; text-align: center; color: var(--text-gray); font-weight: 600;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        .team-table-container { overflow-x: auto; margin-top: 60px; background: white; padding: 20px; border-radius: 30px; border: 1px solid #eee; }
-        table { width: 100%; border-collapse: collapse; }
-        th, td { padding: 22px; text-align: left; border-bottom: 1px solid #f0f0f0; }
-        th { background: #fafafa; color: var(--text-dark); font-weight: 800; }
-        td b { color: var(--primary-blue); }
-
-        /* 5. Recruitment & FAQ */
-        .recruit { background: var(--bg-light); text-align: center; border-radius: 80px 80px 0 0; }
-        .faq-container { max-width: 850px; margin: 50px auto; text-align: left; }
-        .faq-item { margin-bottom: 20px; background: white; padding: 25px; border-radius: 20px; border: 1px solid #f0f0f0; }
-        .faq-item b { color: var(--primary-blue); font-size: 1.1rem; display: block; margin-bottom: 8px; }
-
-        /* Countdown */
-        .countdown-wrap { 
-            padding: 80px 10%; background: var(--primary-blue); color: white; border-radius: 40px; 
-            margin: 0 5% 100px; text-align: center;
-        }
-        #timer { font-size: clamp(2.2rem, 6vw, 4.5rem); font-weight: 900; letter-spacing: 3px; color: var(--accent-orange); }
-
-        footer { padding: 70px; text-align: center; color: #999; font-size: 0.85rem; border-top: 1px solid #eee; }
+        footer { padding: 50px; font-size: 0.7rem; color: #555; text-align: center; background: var(--black); }
 
         @media (max-width: 768px) {
-            section { padding: 90px 5%; }
-            .org-branch-container { grid-template-columns: 1fr; padding-top: 0; }
-            .org-branch-container::before { display: none; }
-            .org-column { margin-bottom: 40px; }
+            header { padding: 20px; flex-direction: column; align-items: flex-start; }
+            nav { margin-left: 0; margin-top: 20px; gap: 15px; }
+            .mission-info h2 { font-size: 2.5rem; }
         }
     </style>
 </head>
 <body>
 
 <header>
-    <div class="logo" onclick="location.href='#'"><i class="fas fa-rocket"></i> ROCKET LAB</div>
+    <div class="logo">ROCKET LAB</div>
     <nav>
-        <a href="#about">ABOUT</a>
-        <a href="#tech">TECH</a>
-        <a href="#teams">TEAMS</a>
-        <a href="#recruit">RECRUIT</a>
+        <a href="#nura">NURA MISSION</a>
+        <a href="#tech">TECHNOLOGY</a>
+        <a href="#org">ORGANIZATION</a>
+        <a href="#join">JOIN</a>
     </nav>
 </header>
 
-<section class="hero">
-    <h1>Reach for the<br><span style="color:var(--primary-blue)">Future.</span></h1>
-    <p>이론을 넘어 실전 로켓 공학을 탐구하는 엔지니어링 커뮤니티입니다.<br>우리는 우주를 향한 기술적 한계를 돌파합니다.</p>
-    <button class="hero-btn" onclick="location.href='#recruit'">신입 부원 지원하기</button>
-</section>
-
-<section id="about" class="about">
-    <h2 class="section-title">Identity & Roadmap</h2>
-    <div class="roadmap">
-        <div class="roadmap-item">
-            <h4>상반기 (Prep)</h4>
-            <p>기체 상세 설계, Avionics 프로토타이핑 및 시스템 통합 테스트</p>
-        </div>
-        <div class="roadmap-item" style="border: 2px solid var(--primary-blue);">
-            <h4>8월 (Launch)</h4>
-            <p>NURA 대학생 로켓 경진대회 참가. 고도 1,000m 목표 발사 프로젝트</p>
-        </div>
-        <div class="roadmap-item">
-            <h4>하반기 (Analysis)</h4>
-            <p>비행 데이터 분석, 기술 고도화 세미나 및 차기 모델 R&D</p>
-        </div>
+<section id="nura" class="section bg-1">
+    <div class="mission-info">
+        <h4>UPCOMING MISSION</h4>
+        <h2>NURA 2026<br>LAUNCH PROJECT</h2>
+        <a href="#" class="btn-outline">VIEW MISSION</a>
     </div>
 </section>
 
-<section id="tech">
-    <h2 class="section-title">Core Technology</h2>
-    <div class="tech-grid">
-        <div class="tech-card">
-            <i class="fas fa-drafting-compass"></i>
+<section id="tech" class="section bg-2">
+    <div class="mission-info">
+        <h4>CORE TECHNOLOGY</h4>
+        <h2>AVIONICS &<br>STRUCTURE</h2>
+        <a href="#" class="btn-outline">LEARN MORE</a>
+    </div>
+</section>
+
+<section id="org" class="org-section">
+    <h2 class="org-title">Organization</h2>
+    <div class="org-grid">
+        <div class="team-box">
             <h3>Structure</h3>
-            <p>CAD 기반 기체 설계 및 3D 프린팅 활용 구조 제작 기술</p>
+            <ul>
+                <li>기체 설계 및 외형 최적화</li>
+                <li>낙하산 사출 시스템 메커니즘</li>
+                <li>구조 강성 및 공력 해석</li>
+            </ul>
         </div>
-        <div class="tech-card">
-            <i class="fas fa-microchip"></i>
+        <div class="team-box">
             <h3>Avionics</h3>
-            <p>ESP32 기반 비행 제어 컴퓨터 및 실시간 데이터 텔레메트리 구현</p>
+            <ul>
+                <li>Flight Computer 임베디드 코딩</li>
+                <li>PCB 회로 설계 및 센서 통합</li>
+                <li>실시간 데이터 텔레메트리 구현</li>
+            </ul>
         </div>
-        <div class="tech-card">
-            <i class="fas fa-satellite-dish"></i>
-            <h3>Payload</h3>
-            <p>임무 수행을 위한 센서 통합 시스템 및 대기 데이터 수집 모듈</p>
+        <div class="team-box">
+            <h3>Operations</h3>
+            <ul>
+                <li>대외 협력 및 행정 지원</li>
+                <li>프로젝트 매니지먼트 및 홍보</li>
+                <li>예산 수립 및 자금 운용</li>
+            </ul>
         </div>
     </div>
 </section>
-
-<section id="teams" class="org-container">
-    <h2 class="section-title">Organization</h2>
-    <div class="org-chart-wrapper">
-        <div class="org-node node-top">Project Manager (회장)</div>
-        <div class="vertical-line"></div>
-        
-        <div class="org-branch-container">
-            <div class="org-column">
-                <div class="vertical-line"></div>
-                <div class="org-node node-team">기체 설계팀</div>
-                <div class="sub-node-list">
-                    <div class="sub-node">동체 구조 설계부</div>
-                    <div class="sub-node">낙하산 사출 제어부</div>
-                    <div class="sub-node">구조 해석 및 테스트부</div>
-                </div>
-            </div>
-
-            <div class="org-column">
-                <div class="vertical-line"></div>
-                <div class="org-node node-team">임베디드 제어팀</div>
-                <div class="sub-node-list">
-                    <div class="sub-node">Flight Computer SW부</div>
-                    <div class="sub-node">회로 설계 및 하드웨어부</div>
-                    <div class="sub-node">지상국 통신 텔레메트리부</div>
-                </div>
-            </div>
-
-            <div class="org-column">
-                <div class="vertical-line"></div>
-                <div class="org-node node-team">운영 홍보팀</div>
-                <div class="sub-node-list">
-                    <div class="sub-node">대외 협력 및 스폰서십부</div>
-                    <div class="sub-node">미디어 홍보 콘텐츠부</div>
-                    <div class="sub-node">행정 및 예산 관리부</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="team-table-container">
-        <table>
-            <thead>
-                <tr>
-                    <th>핵심 조직</th>
-                    <th>주요 R&R (업무 범위)</th>
-                    <th>사용 기술 스택</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><b>기체 설계팀</b></td>
-                    <td>에어프레임 최적화 및 페이로드 수납 설계</td>
-                    <td>SolidWorks, OpenRocket, ANSYS</td>
-                </tr>
-                <tr>
-                    <td><b>임베디드 제어팀</b></td>
-                    <td>비행 제어 알고리즘 및 센서 데이터 퓨전</td>
-                    <td>C/C++, MCU, KiCad, PID Control</td>
-                </tr>
-                <tr>
-                    <td><b>운영 홍보팀</b></td>
-                    <td>대회 행정 총괄 및 프로젝트 스케줄 관리</td>
-                    <td>Notion, Adobe Suite, Slack</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</section>
-
-<section id="recruit" class="recruit">
-    <h2 class="section-title">Join Our Crew</h2>
-    <div class="faq-container">
-        <div class="faq-item">
-            <b>Q. 관련 지식이 부족한데 지원 가능한가요?</b>
-            <p>A. 열정만 있다면 내부 교육 세션을 통해 충분히 함께 성장할 수 있습니다.</p>
-        </div>
-        <div class="faq-item">
-            <b>Q. 정기 활동 시간은 어떻게 되나요?</b>
-            <p>A. 매주 지정된 요일 정기 세미나와 팀별 자율 프로젝트로 운영됩니다.</p>
-        </div>
-    </div>
-    <button class="hero-btn" style="background:var(--accent-orange)" onclick="window.open('https://forms.google.com', '_blank')">Apply Now (Google Form)</button>
-</section>
-
-<div class="countdown-wrap">
-    <h3>NURA Competition Countdown</h3>
-    <div id="timer">00 : 00 : 00 : 00</div>
-    <p style="margin-top: 15px; opacity: 0.8; font-weight: 600;">COUNTDOWN TO LIFT OFF</p>
-</div>
 
 <footer>
-    <p style="font-weight: 800; color: var(--text-dark); margin-bottom: 5px;">Rocketry Research & Development Lab</p>
-    <p>© 2026 Rocket Lab. All Rights Reserved.</p>
+    <p>ROCKETRY RESEARCH & DEVELOPMENT LAB © 2026</p>
 </footer>
-
-<script>
-    function updateTimer() {
-        const targetDate = new Date("August 1, 2026 00:00:00").getTime();
-        const now = new Date().getTime();
-        const distance = targetDate - now;
-
-        if (distance < 0) {
-            document.getElementById("timer").innerText = "LIFT OFF!";
-            return;
-        }
-
-        const d = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const s = Math.floor((distance % (1000 * 60)) / 1000);
-
-        const f = (n) => String(n).padStart(2, '0');
-        document.getElementById("timer").innerText = `${f(d)} : ${f(h)} : ${f(m)} : ${f(s)}`;
-    }
-    setInterval(updateTimer, 1000);
-    updateTimer();
-</script>
 
 </body>
 </html>
